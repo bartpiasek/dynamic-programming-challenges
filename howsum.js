@@ -7,17 +7,20 @@
 
 // if there are multiple combinations possible, you may return any single one.
 
-const howSum = (targetSum, numbers) => {
+const howSum = (targetSum, numbers, memo={}) => {
+    if (targetSum in memo) return memo[targetSum];
     if (targetSum === 0) return [];
     if (targetSum < 0) return null;
 
     for (let num of numbers) {
         const remainder = targetSum - num;
-        const remainderResult = howSum(remainder, numbers);
+        const remainderResult = howSum(remainder, numbers, memo);
         if (remainderResult !== null) {
-            return [ ...remainderResult, num ];
+            memo[targetSum] = [ ...remainderResult, num ];
+            return memo[targetSum];
         }
     }
+    memo[targetSum] = null;
     return null;
 };
 
