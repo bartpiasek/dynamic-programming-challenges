@@ -21,9 +21,7 @@ const bestSum = (targetSum, numbers) => {
             // if the combination is shorter than te correct "shortest", update it
             if (shortestCombination === null || combination.length < shortestCombination.length) {
                 shortestCombination = combination;
-
             }
-            
         }
     }
     return shortestCombination;
