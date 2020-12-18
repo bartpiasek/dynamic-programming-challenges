@@ -6,7 +6,8 @@
 
 // PL: najkrótsza kombinacja liczb dająca targetSum
 
-const bestSum = (targetSum, numbers) => {
+const bestSum = (targetSum, numbers, memo={}) => {
+    if (targetSum in memo) return memo[targetSum];
     if (targetSum === 0) return [];
     if (targetSum < 0) return null;
 
@@ -14,7 +15,7 @@ const bestSum = (targetSum, numbers) => {
 
     for (let num of numbers) {
         const remainder = targetSum - num;
-        const remainderCombination = bestSum(remainder, numbers);
+        const remainderCombination = bestSum(remainder, numbers, memo);
         if (remainderCombination !== null) {
             const combination = [ ...remainderCombination, num ];
             // shortest combination
@@ -24,6 +25,7 @@ const bestSum = (targetSum, numbers) => {
             }
         }
     }
+    memo[targetSum] = shortestCombination;
     return shortestCombination;
 };
 
